@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="dam:Asset">
+    <jcr:content
+        cq:name="product-card-simple-homeloan"
+        cq:parentPath="/content/dam/commbank/home-loans"
+        jcr:primaryType="dam:AssetContent"
+        jcr:title="product-card-simple-homeloan"
+        contentFragment="true">
+        <data
+            cq:model="/conf/commbank-content-fragments/settings/dam/cfm/models/product-card"
+            jcr:primaryType="nt:unstructured">
+            <master
+                jcr:primaryType="nt:unstructured"
+                title="Simple Home Loan"
+                image="https://www.commbank.com.au/content/dam/commbank-assets/pictograms/pictogram_WealthPackage.svg"
+                bullets="[Save on interest while having the choice to link up to two Everyday Offset accounts,Unlimited additional repayments and redraws as well as the option to make Interest Only payments.,Negotiate your rate with a Home Lending specialist when you apply for a Simple Home Loan]"
+                description="A simple home loan with a competitive variable rate and the choice to access two offset accounts."
+                href="https://www.commbank.com.au/home-loans/simple.html"/>
+        </data>
+    </jcr:content>
+</jcr:root>

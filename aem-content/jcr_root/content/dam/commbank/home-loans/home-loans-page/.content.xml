@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="dam:Asset">
+    <jcr:content
+        cq:name="home-loans-page"
+        cq:parentPath="/content/dam/commbank/home-loans"
+        jcr:primaryType="dam:AssetContent"
+        jcr:title="home-loans-page"
+        contentFragment="true">
+        <data
+            cq:model="/conf/commbank-content-fragments/settings/dam/cfm/models/home-loans-page"
+            jcr:primaryType="nt:unstructured">
+            <master
+                jcr:primaryType="nt:unstructured"
+                hero="/content/dam/commbank/home-loans/hero-banner-home-loans"
+                whyChooseItems="[/content/dam/commbank/home-loans/feature-item-0,/content/dam/commbank/home-loans/feature-item-1,/content/dam/commbank/home-loans/feature-item-2,/content/dam/commbank/home-loans/feature-item-3]"
+                productCards="[/content/dam/commbank/home-loans/product-card-digi-homeloan,/content/dam/commbank/home-loans/product-card-variable-rate,/content/dam/commbank/home-loans/product-card-simple-homeloan]"/>
+        </data>
+    </jcr:content>
+</jcr:root>

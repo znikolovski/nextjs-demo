@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="dam:Asset">
+    <jcr:content
+        cq:name="product-card-variable-rate"
+        cq:parentPath="/content/dam/commbank/home-loans"
+        jcr:primaryType="dam:AssetContent"
+        jcr:title="product-card-variable-rate"
+        contentFragment="true">
+        <data
+            cq:model="/conf/commbank-content-fragments/settings/dam/cfm/models/product-card"
+            jcr:primaryType="nt:unstructured">
+            <master
+                jcr:primaryType="nt:unstructured"
+                title="Standard Variable Rate"
+                image="https://www.commbank.com.au/content/dam/commbank-assets/pictograms/property-investments_pictograms.svg"
+                bullets="[Save on interest by using up to 99 Everyday Offset accounts,Complete flexibility with multiple repayment options,Access to Package benefits including a discounted interest rate]"
+                description="A competitive variable rate home loan with discounts tailored to you, plus access to offset and an extensive range of features."
+                href="/home-loans/variable-rate"/>
+        </data>
+    </jcr:content>
+</jcr:root>

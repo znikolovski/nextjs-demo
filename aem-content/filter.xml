@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/commbank-content-fragments"/>
+    <!--
+      mode="merge": package install only adds/updates content under these
+      roots, never deletes anything live-authored that isn't in the package —
+      important once you start creating Pages/Sections through the "+"
+      button or the classic Assets console, so a later redeploy doesn't wipe
+      them. See cba-homeloans-web/UNIVERSAL_EDITOR_LOCAL_SETUP.md for the
+      incident that motivated this.
+    -->
+    <filter root="/content/dam/commbank/home-loans" mode="merge"/>
+    <filter root="/content/dam/commbank/pages" mode="merge"/>
+    <filter root="/content/dam/commbank/hero-banners" mode="merge"/>
+    <filter root="/content/dam/commbank/feature-items" mode="merge"/>
+    <filter root="/content/dam/commbank/product-cards" mode="merge"/>
+    <filter root="/content/dam/commbank/section-groups" mode="merge"/>
+</workspaceFilter>

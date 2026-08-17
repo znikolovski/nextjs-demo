@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>pictogram/Medium./Document64</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="pictogram/Medium./Document64" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Bounding-Box" x="0" y="0" width="64" height="64"></rect>
+        <g id="pictogram" transform="translate(13.000000, 8.000000)" stroke="#4F4C4D" stroke-width="2">
+            <polygon id="Rectangle-13" fill="#FFFFFF" points="0 48 0 0 27 0 38 11 38 48"></polygon>
+            <polyline id="Rectangle" fill="#FFCC00" points="37.595459 12 26 12 26 0.400878906"></polyline>
+        </g>
+    </g>
+</svg>

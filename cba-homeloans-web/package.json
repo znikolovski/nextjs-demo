@@ -1,0 +1,34 @@
+{
+  "name": "cba-homeloans-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "fetch-schema": "curl -s -u ${AEM_USER:-admin}:${AEM_PASSWORD:-admin} \"${AEM_BASE_URL:-http://localhost:4502}/content/cq:graphql/${AEM_GRAPHQL_CONFIG_NAME:-commbank-content-fragments}/endpoint.GQLschema\" -o schema/aem.graphql",
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "dependencies": {
+    "isomorphic-dompurify": "^3.21.0",
+    "next": "16.2.12",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^7.2.0",
+    "@graphql-codegen/typescript": "^6.1.0",
+    "@graphql-codegen/typescript-operations": "^6.1.2",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.12",
+    "graphql": "^16.14.2",
+    "sass": "^1.102.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

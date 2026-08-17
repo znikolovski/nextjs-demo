@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="dam:Asset">
+    <jcr:content
+        cq:name="footer-column-quick-links"
+        cq:parentPath="/content/dam/commbank/home-loans"
+        jcr:primaryType="dam:AssetContent"
+        jcr:title="footer-column-quick-links"
+        contentFragment="true">
+        <data
+            cq:model="/conf/commbank-content-fragments/settings/dam/cfm/models/footer-column"
+            jcr:primaryType="nt:unstructured">
+            <master
+                jcr:primaryType="nt:unstructured"
+                sectionTitle="Quick links"
+                links="[/content/dam/commbank/home-loans/nav-link-footer-quick-links-0,/content/dam/commbank/home-loans/nav-link-footer-quick-links-1,/content/dam/commbank/home-loans/nav-link-footer-quick-links-2,/content/dam/commbank/home-loans/nav-link-footer-quick-links-3,/content/dam/commbank/home-loans/nav-link-footer-quick-links-4]"/>
+        </data>
+    </jcr:content>
+</jcr:root>

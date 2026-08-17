@@ -1,0 +1,36 @@
+query GetHomeLoansPage {
+  homeLoansPageList {
+    items {
+      _path
+      hero {
+        _path
+        title
+        subtitle { html }
+        image
+        primaryCtaLabel
+        primaryCtaUrl
+        secondaryCtaLabel
+        secondaryCtaUrl
+      }
+      whyChooseItems {
+        _path
+        title
+        description { html }
+      }
+      productCards {
+        _path
+        title
+        image
+        bullets
+        description { html }
+        href
+      }
+    }
+  }
+}
+
+# Models the Home Loans landing page itself — one singleton instance whose
+# hero/whyChooseItems/productCards fragment-reference fields tie the page's
+# sections together, mirroring home-loan-product's rateEntries/disclaimers
+# pattern. `hero` is a single (non-list) fragment-reference field, so it's
+# selected directly as an object, not a list.

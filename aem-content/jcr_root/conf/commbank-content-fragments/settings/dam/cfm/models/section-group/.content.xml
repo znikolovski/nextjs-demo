@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Template"
+    allowedPaths="[/content/dam/commbank(/.*)?]"
+    ranking="{Long}100">
+    <jcr:content
+        cq:scaffolding="/conf/commbank-content-fragments/settings/dam/cfm/models/section-group/jcr:content/model"
+        cq:templateType="/libs/settings/dam/cfm/model-types/fragment"
+        jcr:description="Groups an ordered list of same-kind section fragments (e.g. several Feature Items, or several Product Cards) under one shared layout, so a Page composed of this group renders them together (e.g. side-by-side in a row) instead of each as its own standalone block. This replaces inferring grouping from array adjacency with an explicit authoring choice."
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Section Group"
+        sling:resourceSuperType="dam/cfm/models/console/components/data/entity"
+        sling:resourceType="dam/cfm/models/console/components/data/entity/default"
+        status="enabled">
+        <metadata jcr:primaryType="nt:unstructured">
+            <graphQL
+                jcr:primaryType="nt:unstructured"
+                apiName="SectionGroup"
+                queryFieldMultiple="sectionGroupList"
+                queryFieldSingle="sectionGroupByPath"/>
+        </metadata>
+        <model
+            cq:targetPath="/content/dam/commbank/pages"
+            jcr:primaryType="cq:PageContent"
+            sling:resourceType="wcm/scaffolding/components/scaffolding"
+            dataTypesConfig="/mnt/overlay/settings/dam/cfm/models/formbuilderconfig/datatypes"
+            maxGeneratedOrder="10">
+            <cq:dialog
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/authoring/dialog">
+                <content
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                    <items jcr:primaryType="nt:unstructured">
+                        <heading
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldDescription="Optional heading rendered above the group, e.g. &quot;Why choose CommBank?&quot;."
+                            fieldLabel="Heading"
+                            listOrder="1"
+                            metaType="text-single"
+                            name="heading"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </heading>
+                        <layout
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                            emptyOption="{Boolean}false"
+                            fieldLabel="Layout"
+                            listOrder="2"
+                            metaType="enumeration"
+                            name="layout"
+                            renderReadOnly="false"
+                            showEmptyInReadOnly="true"
+                            valueType="string/enum">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                            <optionsmultifield jcr:primaryType="nt:unstructured">
+                                <item0 jcr:primaryType="nt:unstructured" fieldLabel="Horizontal (side-by-side)" fieldValue="horizontal"/>
+                                <item1 jcr:primaryType="nt:unstructured" fieldLabel="Vertical (stacked)" fieldValue="vertical"/>
+                            </optionsmultifield>
+                            <datasource
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="dam/cfm/admin/components/datasources/optionrendererenumeration"
+                                variant="default"/>
+                        </layout>
+                        <items
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/models/editor/components/fragmentreference/multifield"
+                            allowNew="{Boolean}true"
+                            fieldDescription="The items in this group, in display order."
+                            fieldLabel="Items"
+                            filter="hierarchy"
+                            fragmentmodelreference="[/conf/commbank-content-fragments/settings/dam/cfm/models/feature-item,/conf/commbank-content-fragments/settings/dam/cfm/models/product-card]"
+                            listOrder="3"
+                            metaType="fragment-reference"
+                            name="items"
+                            nameSuffix="contentReference"
+                            rootPath="/content/dam/commbank"
+                            valueType="string/content-fragment[]">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="dam/cfm/models/editor/components/fragmentreference"
+                                fragmentmodelreference="[/conf/commbank-content-fragments/settings/dam/cfm/models/feature-item,/conf/commbank-content-fragments/settings/dam/cfm/models/product-card]"
+                                name="items">
+                                <granite:data jcr:primaryType="nt:unstructured"/>
+                            </field>
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </items>
+                    </items>
+                </content>
+            </cq:dialog>
+        </model>
+    </jcr:content>
+</jcr:root>

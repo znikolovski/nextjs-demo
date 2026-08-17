@@ -1,0 +1,14 @@
+ {
+  pageList {
+    items {
+      _path
+      path
+      title
+    }
+  }
+}
+
+# Lists every authored Page instance (minimal fields) — used by
+# cba-homeloans-web's app/sitemap.ts to enumerate all pages/* routes without
+# needing AEM's own (cq:Page/dam:Asset-only) sitemap generator to know about
+# CFM-based pages.

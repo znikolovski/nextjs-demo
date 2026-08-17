@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:dam="http://www.day.com/dam/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="dam:Asset">
+    <jcr:content
+        cq:name="product-card-digi-homeloan"
+        cq:parentPath="/content/dam/commbank/home-loans"
+        jcr:primaryType="dam:AssetContent"
+        jcr:title="product-card-digi-homeloan"
+        contentFragment="true">
+        <data
+            cq:model="/conf/commbank-content-fragments/settings/dam/cfm/models/product-card"
+            jcr:primaryType="nt:unstructured">
+            <master
+                jcr:primaryType="nt:unstructured"
+                title="Digi Home Loan"
+                image="https://www.commbank.com.au/content/dam/commbank-assets/pictograms/pictogramOnline64.svg"
+                bullets="[A low variable rate when you apply online,Earn up to 300\,000 Qantas Points with a CommBank Digi Home Loan.,Unlimited additional repayments\, with ability to redraw and one Everyday Offset account,Easily apply in minutes using the CommBank app and manage your home loan online]"
+                description="A digital home loan with a low variable rate and access to one Everyday Offset account. Only available online."
+                href="/home-loans/digi-homeloan"/>
+        </data>
+    </jcr:content>
+</jcr:root>

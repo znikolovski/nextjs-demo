@@ -1,0 +1,14 @@
+# Mirrors the persisted query authored in cba-digital at
+# aem.commbank-lego/ui.content/src/main/content/graphql-persisted-queries/list-pages.graphql
+# (the actual query AEM executes) — kept here only so graphql-codegen has an
+# operation document to generate types from. If the persisted query's field
+# selection changes, this file must change to match.
+query ListPages {
+  pageList {
+    items {
+      _path
+      path
+      title
+    }
+  }
+}

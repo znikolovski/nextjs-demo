@@ -1,0 +1,10 @@
+[
+  {
+    "id": "page-sections",
+    "components": ["hero-banner", "feature-item", "product-card", "section-group"]
+  },
+  {
+    "id": "section-group-items",
+    "components": ["feature-item", "product-card"]
+  }
+]

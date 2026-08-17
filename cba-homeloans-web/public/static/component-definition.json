@@ -1,0 +1,107 @@
+{
+  "groups": [
+    {
+      "title": "Sections",
+      "id": "sections",
+      "components": [
+        {
+          "title": "Hero Banner",
+          "id": "hero-banner",
+          "plugins": {
+            "aem": {
+              "cf": {
+                "name": "hero-banner",
+                "cfModel": "/conf/commbank-content-fragments/settings/dam/cfm/models/hero-banner",
+                "cfFolder": "/content/dam/commbank/hero-banners",
+                "title": "Hero Banner",
+                "description": "A hero banner section (title, subtitle, image, up to 2 CTAs)."
+              }
+            },
+            "aem65": {
+              "cf": {
+                "name": "hero-banner",
+                "cfModel": "/conf/commbank-content-fragments/settings/dam/cfm/models/hero-banner",
+                "cfFolder": "/content/dam/commbank/hero-banners",
+                "title": "Hero Banner",
+                "description": "A hero banner section (title, subtitle, image, up to 2 CTAs)."
+              }
+            }
+          }
+        },
+        {
+          "title": "Feature Item",
+          "id": "feature-item",
+          "plugins": {
+            "aem": {
+              "cf": {
+                "name": "feature-item",
+                "cfModel": "/conf/commbank-content-fragments/settings/dam/cfm/models/feature-item",
+                "cfFolder": "/content/dam/commbank/feature-items",
+                "title": "Feature Item",
+                "description": "A single feature callout (title + description)."
+              }
+            },
+            "aem65": {
+              "cf": {
+                "name": "feature-item",
+                "cfModel": "/conf/commbank-content-fragments/settings/dam/cfm/models/feature-item",
+                "cfFolder": "/content/dam/commbank/feature-items",
+                "title": "Feature Item",
+                "description": "A single feature callout (title + description)."
+              }
+            }
+          }
+        },
+        {
+          "title": "Product Card",
+          "id": "product-card",
+          "plugins": {
+            "aem": {
+              "cf": {
+                "name": "product-card",
+                "cfModel": "/conf/commbank-content-fragments/settings/dam/cfm/models/product-card",
+                "cfFolder": "/content/dam/commbank/product-cards",
+                "title": "Product Card",
+                "description": "A single product marketing card (title, image, bullets, description, link)."
+              }
+            },
+            "aem65": {
+              "cf": {
+                "name": "product-card",
+                "cfModel": "/conf/commbank-content-fragments/settings/dam/cfm/models/product-card",
+                "cfFolder": "/content/dam/commbank/product-cards",
+                "title": "Product Card",
+                "description": "A single product marketing card (title, image, bullets, description, link)."
+              }
+            }
+          }
+        },
+        {
+          "title": "Section Group",
+          "id": "section-group",
+          "filter": "section-group-items",
+          "plugins": {
+            "aem": {
+              "cf": {
+                "name": "section-group",
+                "cfModel": "/conf/commbank-content-fragments/settings/dam/cfm/models/section-group",
+                "cfFolder": "/content/dam/commbank/section-groups",
+                "title": "Section Group",
+                "description": "Groups an ordered list of same-kind items (e.g. several Feature Items) under one shared layout."
+              }
+            },
+            "aem65": {
+              "cf": {
+                "name": "section-group",
+                "cfModel": "/conf/commbank-content-fragments/settings/dam/cfm/models/section-group",
+                "cfFolder": "/content/dam/commbank/section-groups",
+                "title": "Section Group",
+                "description": "Groups an ordered list of same-kind items (e.g. several Feature Items) under one shared layout."
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

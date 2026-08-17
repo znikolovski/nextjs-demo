@@ -1,0 +1,63 @@
+# Mirrors the persisted query authored in cba-digital at
+# aem.commbank-lego/ui.content/src/main/content/graphql-persisted-queries/get-page-by-path.graphql
+# (the actual query AEM executes) — kept here only so graphql-codegen has an
+# operation document to generate types from. If the persisted query's field
+# selection changes, this file must change to match.
+query GetPageByPath($path: String!) {
+  pageList(filter: { path: { _expressions: [{ value: $path }] } }) {
+    items {
+      _path
+      title
+      path
+      seoTitle
+      seoDescription { html }
+      sections {
+        __typename
+        ... on HeroBannerModel {
+          _path
+          title
+          subtitle { html }
+          image
+          primaryCtaLabel
+          primaryCtaUrl
+          secondaryCtaLabel
+          secondaryCtaUrl
+        }
+        ... on FeatureItemModel {
+          _path
+          title
+          description { html }
+        }
+        ... on ProductCardModel {
+          _path
+          title
+          image
+          bullets
+          description { html }
+          href
+        }
+        ... on SectionGroupModel {
+          _path
+          heading
+          layout
+          items {
+            __typename
+            ... on FeatureItemModel {
+              _path
+              title
+              description { html }
+            }
+            ... on ProductCardModel {
+              _path
+              title
+              image
+              bullets
+              description { html }
+              href
+            }
+          }
+        }
+      }
+    }
+  }
+}

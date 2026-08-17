@@ -1,0 +1,66 @@
+query($path: String!) {
+  pageList(filter: { path: { _expressions: [{ value: $path }] } }) {
+    items {
+      _path
+      title
+      path
+      seoTitle
+      seoDescription { html }
+      sections {
+        __typename
+        ... on HeroBannerModel {
+          _path
+          title
+          subtitle { html }
+          image
+          primaryCtaLabel
+          primaryCtaUrl
+          secondaryCtaLabel
+          secondaryCtaUrl
+        }
+        ... on FeatureItemModel {
+          _path
+          title
+          description { html }
+        }
+        ... on ProductCardModel {
+          _path
+          title
+          image
+          bullets
+          description { html }
+          href
+        }
+        ... on SectionGroupModel {
+          _path
+          heading
+          layout
+          items {
+            __typename
+            ... on FeatureItemModel {
+              _path
+              title
+              description { html }
+            }
+            ... on ProductCardModel {
+              _path
+              title
+              image
+              bullets
+              description { html }
+              href
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+# Generic Page lookup by routable path (e.g. "pages/refinance-guide"), not
+# JCR path — mirrors get-product-by-slug.graphql's filter-by-field pattern
+# since Page.path is an author-set field, not the fragment's node path.
+# `sections` is a multi-type fragment-reference (bracket-list
+# fragmentmodelreference on the `page` CFM), so it resolves through AEM's
+# AllFragmentModels union — select concrete fields per section type via
+# `... on <Type>Model`, keyed at render time in Next.js on `__typename`.

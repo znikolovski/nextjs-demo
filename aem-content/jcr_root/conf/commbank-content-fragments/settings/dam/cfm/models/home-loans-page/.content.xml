@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Template"
+    allowedPaths="[/content/dam/commbank/home-loans(/.*)?]"
+    ranking="{Long}100">
+    <jcr:content
+        cq:scaffolding="/conf/commbank-content-fragments/settings/dam/cfm/models/home-loans-page/jcr:content/model"
+        cq:templateType="/libs/settings/dam/cfm/model-types/fragment"
+        jcr:description="Models the Home Loans landing page itself: ties its sections (hero, why-choose feature items, product cards) together as fragment references, the same way home-loan-product ties together rateEntries/disclaimers."
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Home Loans Page"
+        sling:resourceSuperType="dam/cfm/models/console/components/data/entity"
+        sling:resourceType="dam/cfm/models/console/components/data/entity/default"
+        status="enabled">
+        <metadata jcr:primaryType="nt:unstructured">
+            <graphQL
+                jcr:primaryType="nt:unstructured"
+                apiName="HomeLoansPage"
+                queryFieldMultiple="homeLoansPageList"
+                queryFieldSingle="homeLoansPageByPath"/>
+        </metadata>
+        <model
+            cq:targetPath="/content/dam/commbank/home-loans"
+            jcr:primaryType="cq:PageContent"
+            sling:resourceType="wcm/scaffolding/components/scaffolding"
+            dataTypesConfig="/mnt/overlay/settings/dam/cfm/models/formbuilderconfig/datatypes"
+            maxGeneratedOrder="10">
+            <cq:dialog
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/authoring/dialog">
+                <content
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                    <items jcr:primaryType="nt:unstructured">
+                        <hero
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/models/editor/components/fragmentreference"
+                            allowNew="{Boolean}true"
+                            fieldLabel="Hero Banner"
+                            filter="hierarchy"
+                            fragmentmodelreference="/conf/commbank-content-fragments/settings/dam/cfm/models/hero-banner"
+                            listOrder="1"
+                            metaType="fragment-reference"
+                            name="hero"
+                            nameSuffix="contentReference"
+                            rootPath="/content/dam/commbank/home-loans"
+                            valueType="string/content-fragment">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </hero>
+                        <whyChooseItems
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/models/editor/components/fragmentreference/multifield"
+                            allowNew="{Boolean}true"
+                            fieldLabel="Why Choose CommBank Items"
+                            filter="hierarchy"
+                            fragmentmodelreference="/conf/commbank-content-fragments/settings/dam/cfm/models/feature-item"
+                            listOrder="2"
+                            metaType="fragment-reference"
+                            name="whyChooseItems"
+                            nameSuffix="contentReference"
+                            rootPath="/content/dam/commbank/home-loans"
+                            valueType="string/content-fragment[]">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="dam/cfm/models/editor/components/fragmentreference"
+                                fragmentmodelreference="/conf/commbank-content-fragments/settings/dam/cfm/models/feature-item"
+                                name="whyChooseItems">
+                                <granite:data jcr:primaryType="nt:unstructured"/>
+                            </field>
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </whyChooseItems>
+                        <productCards
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/models/editor/components/fragmentreference/multifield"
+                            allowNew="{Boolean}true"
+                            fieldLabel="Product Cards"
+                            filter="hierarchy"
+                            fragmentmodelreference="/conf/commbank-content-fragments/settings/dam/cfm/models/product-card"
+                            listOrder="3"
+                            metaType="fragment-reference"
+                            name="productCards"
+                            nameSuffix="contentReference"
+                            rootPath="/content/dam/commbank/home-loans"
+                            valueType="string/content-fragment[]">
+                            <field
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="dam/cfm/models/editor/components/fragmentreference"
+                                fragmentmodelreference="/conf/commbank-content-fragments/settings/dam/cfm/models/product-card"
+                                name="productCards">
+                                <granite:data jcr:primaryType="nt:unstructured"/>
+                            </field>
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </productCards>
+                    </items>
+                </content>
+            </cq:dialog>
+        </model>
+    </jcr:content>
+</jcr:root>

@@ -1,0 +1,37 @@
+{
+  siteChromeList {
+    items {
+      _path
+      navLinks {
+        _path
+        label
+        url
+      }
+      sectionNavItems {
+        _path
+        label
+        url
+        image
+      }
+      footerColumns {
+        _path
+        sectionTitle
+        links {
+          _path
+          label
+          url
+        }
+      }
+      footerText { html }
+      acknowledgementLinkText
+      acknowledgementLinkUrl
+    }
+  }
+}
+
+# Global site chrome (header nav + section-nav row + footer) — one singleton
+# instance under /content/dam/commbank/home-loans, fetched once by the shared
+# Next.js layout (app/home-loans/layout.tsx) instead of duplicated per page.
+# Nested fragment-reference fields (navLinks, sectionNavItems, footerColumns,
+# footerColumns.links) are plain GraphQL LIST fields — no items/item wrapper,
+# same convention as home-loan-product.rateEntries.

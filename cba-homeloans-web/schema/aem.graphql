@@ -1,0 +1,1881 @@
+schema {
+    query: QueryType
+}
+
+scalar Calendar
+scalar Json
+scalar Date
+scalar Time
+
+enum LogOp {
+    AND
+    OR
+}
+
+enum ArrayMode {
+    AT_LEAST_ONCE
+    ALL
+    ALL_OR_EMPTY
+    INSTANCES
+}
+
+enum IDOperator {
+    EQUALS
+    EQUALS_NOT
+    STARTS_WITH
+}
+
+enum StringOperator {
+    EQUALS
+    EQUALS_NOT
+    CONTAINS
+    CONTAINS_NOT
+}
+
+enum IntOperator {
+    EQUAL
+    UNEQUAL
+    GREATER
+    GREATER_EQUAL
+    LOWER
+    LOWER_EQUAL
+}
+
+enum FloatOperator {
+    EQUAL
+    UNEQUAL
+    GREATER
+    GREATER_EQUAL
+    LOWER
+    LOWER_EQUAL
+}
+
+enum BooleanOperator {
+    EQUALS
+}
+
+enum CalendarOperator {
+    AT
+    NOT_AT
+    BEFORE
+    AT_OR_BEFORE
+    AFTER
+    AT_OR_AFTER
+}
+
+enum DateOperator {
+    AT
+    NOT_AT
+    BEFORE
+    AT_OR_BEFORE
+    AFTER
+    AT_OR_AFTER
+}
+
+enum TimeOperator {
+    AT
+    NOT_AT
+    BEFORE
+    AT_OR_BEFORE
+    AFTER
+    AT_OR_AFTER
+}
+
+type PageInfo {
+    hasPreviousPage: Boolean!
+    hasNextPage: Boolean!
+    startCursor: String
+    endCursor: String
+}
+
+type StringMetadata {
+    name: String!
+    value: String!
+}
+
+type StringArrayMetadata {
+    name: String!
+    value: [String]!
+}
+
+type IntMetadata {
+    name: String!
+    value: Int!
+}
+
+type IntArrayMetadata {
+    name: String!
+    value: [Int]!
+}
+
+type FloatMetadata {
+    name: String!
+    value: Float!
+}
+
+type FloatArrayMetadata {
+    name: String!
+    value: [Float]!
+}
+
+type BooleanMetadata {
+    name: String!
+    value: Boolean!
+}
+
+type BooleanArrayMetadata {
+    name: String!
+    value: [Boolean]!
+}
+
+type CalendarMetadata {
+    name: String!
+    value: Calendar!
+}
+
+type CalendarArrayMetadata {
+    name: String!
+    value: [Calendar]!
+}
+
+type TypedMetaData {
+    stringMetadata: [StringMetadata]!
+    stringArrayMetadata: [StringArrayMetadata]!
+    intMetadata: [IntMetadata]!
+    intArrayMetadata: [IntArrayMetadata]!
+    floatMetadata: [FloatMetadata]!
+    floatArrayMetadata: [FloatArrayMetadata]!
+    booleanMetadata: [BooleanMetadata]!
+    booleanArrayMetadata: [BooleanArrayMetadata]!
+    calendarMetadata: [CalendarMetadata]!
+    calendarArrayMetadata: [CalendarArrayMetadata]!
+}
+
+type MultiFormatString {
+    html: String
+    markdown: String
+    plaintext: String
+    json: Json
+}
+
+type ModelInfo {
+    _path: ID
+    title: String
+}
+
+type ArticleListModelModelResults {
+    items: [ArticleListModelModel]!
+    _references: [Reference]
+}
+
+type ArticleListModelModelEdge {
+    node: ArticleListModelModel!
+    cursor: String!
+}
+
+type ArticleListModelModelConnection {
+    edges: [ArticleListModelModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type ArticleListModelModel {
+    _path: ID
+    _variation: String
+    title: String
+    pictogram: Reference
+    articleReferences: [LinkModelModel]
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type ArticleListModelModelResult {
+    item: ArticleListModelModel!
+    _references: [Reference]
+}
+
+type CompRateModelResults {
+    items: [CompRateModel]!
+    _references: [Reference]
+}
+
+type CompRateModelEdge {
+    node: CompRateModel!
+    cursor: String!
+}
+
+type CompRateModelConnection {
+    edges: [CompRateModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type CompRateModel {
+    _path: ID
+    _variation: String
+    rate: String
+    notemark: String
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type CompRateModelResult {
+    item: CompRateModel!
+    _references: [Reference]
+}
+
+type DisclaimerModelResults {
+    items: [DisclaimerModel]!
+    _references: [Reference]
+}
+
+type DisclaimerModelEdge {
+    node: DisclaimerModel!
+    cursor: String!
+}
+
+type DisclaimerModelConnection {
+    edges: [DisclaimerModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type DisclaimerModel {
+    _path: ID
+    _variation: String
+    headerText: String
+    text: MultiFormatString
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type DisclaimerModelResult {
+    item: DisclaimerModel!
+    _references: [Reference]
+}
+
+type FeatureItemModelResults {
+    items: [FeatureItemModel]!
+    _references: [Reference]
+}
+
+type FeatureItemModelEdge {
+    node: FeatureItemModel!
+    cursor: String!
+}
+
+type FeatureItemModelConnection {
+    edges: [FeatureItemModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type FeatureItemModel {
+    _path: ID
+    _variation: String
+    title: String
+    description: MultiFormatString
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type FeatureItemModelResult {
+    item: FeatureItemModel!
+    _references: [Reference]
+}
+
+type FooterColumnModelResults {
+    items: [FooterColumnModel]!
+    _references: [Reference]
+}
+
+type FooterColumnModelEdge {
+    node: FooterColumnModel!
+    cursor: String!
+}
+
+type FooterColumnModelConnection {
+    edges: [FooterColumnModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type FooterColumnModel {
+    _path: ID
+    _variation: String
+    sectionTitle: String
+    links: [NavLinkModel]
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type FooterColumnModelResult {
+    item: FooterColumnModel!
+    _references: [Reference]
+}
+
+type HeroBannerModelResults {
+    items: [HeroBannerModel]!
+    _references: [Reference]
+}
+
+type HeroBannerModelEdge {
+    node: HeroBannerModel!
+    cursor: String!
+}
+
+type HeroBannerModelConnection {
+    edges: [HeroBannerModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type HeroBannerModel {
+    _path: ID
+    _variation: String
+    title: String
+    subtitle: MultiFormatString
+    image: String
+    primaryCtaLabel: String
+    primaryCtaUrl: String
+    secondaryCtaLabel: String
+    secondaryCtaUrl: String
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type HeroBannerModelResult {
+    item: HeroBannerModel!
+    _references: [Reference]
+}
+
+type HlcCheckboxModelResults {
+    items: [HlcCheckboxModel]!
+    _references: [Reference]
+}
+
+type HlcCheckboxModelEdge {
+    node: HlcCheckboxModel!
+    cursor: String!
+}
+
+type HlcCheckboxModelConnection {
+    edges: [HlcCheckboxModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type HlcCheckboxModel {
+    _path: ID
+    _variation: String
+    fieldTitle: String
+    fieldDescription: MultiFormatString
+    wpWarningMsg: MultiFormatString
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type HlcCheckboxModelResult {
+    item: HlcCheckboxModel!
+    _references: [Reference]
+}
+
+type HlcCompareCardModelResults {
+    items: [HlcCompareCardModel]!
+    _references: [Reference]
+}
+
+type HlcCompareCardModelEdge {
+    node: HlcCompareCardModel!
+    cursor: String!
+}
+
+type HlcCompareCardModelConnection {
+    edges: [HlcCompareCardModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type HlcCompareCardModel {
+    _path: ID
+    _variation: String
+    productCategory: String
+    cardTitle: String
+    analyticsLabel: String
+    productDescription: MultiFormatString
+    columnOneTitle: MultiFormatString
+    columnOneValueKey: String
+    columnOneSuffix: String
+    columnTwoTitle: MultiFormatString
+    columnTwoValueKey: String
+    columnTwoSuffix: String
+    hideRepayment: Boolean
+    sectionTitle: String
+    additionalText: MultiFormatString
+    defaultRepaymentType: String
+    sectionTitleInterest: String
+    additionalTextInterestOnly: MultiFormatString
+    hideAccordion: Boolean
+    collapseOnDesktop: Boolean
+    expandOnMobile: Boolean
+    includeDivider: Boolean
+    accordionTitle: String
+    benefitsContent: MultiFormatString
+    benefitsContentWithoutWealthPackage: MultiFormatString
+    tradeoffsContent: MultiFormatString
+    tradeoffsWithoutPackage: MultiFormatString
+    feeContent: MultiFormatString
+    feeContentWithoutPackage: MultiFormatString
+    tellMeMoreLink: MultiFormatString
+    minLoanMessage1: MultiFormatString
+    fallbackDescription1: MultiFormatString
+    digihomeLvrMessage1: MultiFormatString
+    loanAmountExceedMessage1: MultiFormatString
+    lvrEightyInterestOwnerMessage: MultiFormatString
+    lvrInterestInvestmentMessage: MultiFormatString
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type HlcCompareCardModelResult {
+    item: HlcCompareCardModel!
+    _references: [Reference]
+}
+
+type HlcToggleOptionModelResults {
+    items: [HlcToggleOptionModel]!
+    _references: [Reference]
+}
+
+type HlcToggleOptionModelEdge {
+    node: HlcToggleOptionModel!
+    cursor: String!
+}
+
+type HlcToggleOptionModelConnection {
+    edges: [HlcToggleOptionModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type HlcToggleOptionModel {
+    _path: ID
+    _variation: String
+    productName: String
+    fieldType: String
+    fieldTitle: String
+    fieldDescription: MultiFormatString
+    option1Id: String
+    option1Label: String
+    option2Id: String
+    option2Label: String
+    option3Id: String
+    option3Label: String
+    defaultOptionId: String
+    amountFieldTitle: MultiFormatString
+    amountFieldDefaultValue: String
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type HlcToggleOptionModelResult {
+    item: HlcToggleOptionModel!
+    _references: [Reference]
+}
+
+type HomeLoanProductModelResults {
+    items: [HomeLoanProductModel]!
+    _references: [Reference]
+}
+
+type HomeLoanProductModelEdge {
+    node: HomeLoanProductModel!
+    cursor: String!
+}
+
+type HomeLoanProductModelConnection {
+    edges: [HomeLoanProductModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type HomeLoanProductModel {
+    _path: ID
+    _variation: String
+    sourceId: String
+    productSlug: String
+    name: String
+    lastUpdate: String
+    rateEntries: [RateEntryModel]
+    disclaimers: [DisclaimerModel]
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type HomeLoanProductModelResult {
+    item: HomeLoanProductModel!
+    _references: [Reference]
+}
+
+type HomeLoansPageModelResults {
+    items: [HomeLoansPageModel]!
+    _references: [Reference]
+}
+
+type HomeLoansPageModelEdge {
+    node: HomeLoansPageModel!
+    cursor: String!
+}
+
+type HomeLoansPageModelConnection {
+    edges: [HomeLoansPageModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type HomeLoansPageModel {
+    _path: ID
+    _variation: String
+    hero: HeroBannerModel
+    whyChooseItems: [FeatureItemModel]
+    productCards: [ProductCardModel]
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type HomeLoansPageModelResult {
+    item: HomeLoansPageModel!
+    _references: [Reference]
+}
+
+type LinkModelModelResults {
+    items: [LinkModelModel]!
+    _references: [Reference]
+}
+
+type LinkModelModelEdge {
+    node: LinkModelModel!
+    cursor: String!
+}
+
+type LinkModelModelConnection {
+    edges: [LinkModelModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type LinkModelModel {
+    _path: ID
+    _variation: String
+    pageTitle: String
+    pageUrl: String
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type LinkModelModelResult {
+    item: LinkModelModel!
+    _references: [Reference]
+}
+
+type MdcResultMappingModelModelResults {
+    items: [MdcResultMappingModelModel]!
+    _references: [Reference]
+}
+
+type MdcResultMappingModelModelEdge {
+    node: MdcResultMappingModelModel!
+    cursor: String!
+}
+
+type MdcResultMappingModelModelConnection {
+    edges: [MdcResultMappingModelModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type MdcResultMappingModelModel {
+    _path: ID
+    _variation: String
+    primaryDropdown: String
+    secondaryDropdown: String
+    resultHeading: String
+    resultFragments: [AllFragmentModels]
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type MdcResultMappingModelModelResult {
+    item: MdcResultMappingModelModel!
+    _references: [Reference]
+}
+
+type NavLinkModelResults {
+    items: [NavLinkModel]!
+    _references: [Reference]
+}
+
+type NavLinkModelEdge {
+    node: NavLinkModel!
+    cursor: String!
+}
+
+type NavLinkModelConnection {
+    edges: [NavLinkModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type NavLinkModel {
+    _path: ID
+    _variation: String
+    label: String
+    url: String
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type NavLinkModelResult {
+    item: NavLinkModel!
+    _references: [Reference]
+}
+
+type PageModelResults {
+    items: [PageModel]!
+    _references: [Reference]
+}
+
+type PageModelEdge {
+    node: PageModel!
+    cursor: String!
+}
+
+type PageModelConnection {
+    edges: [PageModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type PageModel {
+    _path: ID
+    _variation: String
+    title: String
+    path: String
+    seoTitle: String
+    seoDescription: MultiFormatString
+    sections: [AllFragmentModels]
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type PageModelResult {
+    item: PageModel!
+    _references: [Reference]
+}
+
+type ProductCardModelResults {
+    items: [ProductCardModel]!
+    _references: [Reference]
+}
+
+type ProductCardModelEdge {
+    node: ProductCardModel!
+    cursor: String!
+}
+
+type ProductCardModelConnection {
+    edges: [ProductCardModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type ProductCardModel {
+    _path: ID
+    _variation: String
+    title: String
+    image: String
+    bullets: [String]
+    description: MultiFormatString
+    href: String
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type ProductCardModelResult {
+    item: ProductCardModel!
+    _references: [Reference]
+}
+
+type QuickLinkModelModelResults {
+    items: [QuickLinkModelModel]!
+    _references: [Reference]
+}
+
+type QuickLinkModelModelEdge {
+    node: QuickLinkModelModel!
+    cursor: String!
+}
+
+type QuickLinkModelModelConnection {
+    edges: [QuickLinkModelModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type QuickLinkModelModel {
+    _path: ID
+    _variation: String
+    title: String
+    pictogram: Reference
+    text: MultiFormatString
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type QuickLinkModelModelResult {
+    item: QuickLinkModelModel!
+    _references: [Reference]
+}
+
+type RateEntryModelResults {
+    items: [RateEntryModel]!
+    _references: [Reference]
+}
+
+type RateEntryModelEdge {
+    node: RateEntryModel!
+    cursor: String!
+}
+
+type RateEntryModelConnection {
+    edges: [RateEntryModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type RateEntryModel {
+    _path: ID
+    _variation: String
+    sourceId: String
+    busref: String
+    catref: String
+    prodref: String
+    publishstatus: String
+    name: String
+    prefix: String
+    rate: String
+    suffix: String
+    futRate: String
+    monthlyRate: String
+    quarterlyRate: String
+    halfYearlyRate: String
+    annualRate: String
+    notemark: String
+    days: String
+    productWebAddress: String
+    compRates: [CompRateModel]
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type RateEntryModelResult {
+    item: RateEntryModel!
+    _references: [Reference]
+}
+
+type SectionGroupModelResults {
+    items: [SectionGroupModel]!
+    _references: [Reference]
+}
+
+type SectionGroupModelEdge {
+    node: SectionGroupModel!
+    cursor: String!
+}
+
+type SectionGroupModelConnection {
+    edges: [SectionGroupModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type SectionGroupModel {
+    _path: ID
+    _variation: String
+    heading: String
+    layout: String
+    items: [AllFragmentModels]
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type SectionGroupModelResult {
+    item: SectionGroupModel!
+    _references: [Reference]
+}
+
+type SectionNavItemModelResults {
+    items: [SectionNavItemModel]!
+    _references: [Reference]
+}
+
+type SectionNavItemModelEdge {
+    node: SectionNavItemModel!
+    cursor: String!
+}
+
+type SectionNavItemModelConnection {
+    edges: [SectionNavItemModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type SectionNavItemModel {
+    _path: ID
+    _variation: String
+    label: String
+    url: String
+    image: String
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type SectionNavItemModelResult {
+    item: SectionNavItemModel!
+    _references: [Reference]
+}
+
+type SiteChromeModelResults {
+    items: [SiteChromeModel]!
+    _references: [Reference]
+}
+
+type SiteChromeModelEdge {
+    node: SiteChromeModel!
+    cursor: String!
+}
+
+type SiteChromeModelConnection {
+    edges: [SiteChromeModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type SiteChromeModel {
+    _path: ID
+    _variation: String
+    navLinks: [NavLinkModel]
+    sectionNavItems: [SectionNavItemModel]
+    footerColumns: [FooterColumnModel]
+    footerText: MultiFormatString
+    acknowledgementLinkText: String
+    acknowledgementLinkUrl: String
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type SiteChromeModelResult {
+    item: SiteChromeModel!
+    _references: [Reference]
+}
+
+type GenericContentFragmentModelResults {
+    items: [GenericContentFragmentModel]!
+    _references: [Reference]
+}
+
+type GenericContentFragmentModelEdge {
+    node: GenericContentFragmentModel!
+    cursor: String!
+}
+
+type GenericContentFragmentModelConnection {
+    edges: [GenericContentFragmentModelEdge]!
+    pageInfo: PageInfo!
+}
+
+type GenericContentFragmentModel {
+    _path: ID
+    _variation: String
+    cfText: MultiFormatString
+    _metadata: TypedMetaData
+    _variations: [String]
+    _model: ModelInfo
+    _tags: [String]
+}
+
+type GenericContentFragmentModelResult {
+    item: GenericContentFragmentModel!
+    _references: [Reference]
+}
+
+type PageRef {
+    type: String
+    _path: ID
+    _authorUrl: String
+    _publishUrl: String
+}
+
+type ImageRef {
+    type: String
+    _path: ID
+    _authorUrl: String
+    _publishUrl: String
+    width: Int
+    height: Int
+    mimeType: String
+}
+
+type MultimediaRef {
+    type: String
+    _path: ID
+    _authorUrl: String
+    _publishUrl: String
+    size: Int
+    format: String
+}
+
+type ArchiveRef {
+    type: String
+    _path: ID
+    _authorUrl: String
+    _publishUrl: String
+    size: Int
+    format: String
+}
+
+type DocumentRef {
+    type: String
+    _path: ID
+    _authorUrl: String
+    _publishUrl: String
+    size: Int
+    author: String
+    format: String
+}
+
+input IDFilterExpression {
+    value: ID
+    _operator: IDOperator = EQUALS
+}
+
+input IDFilter {
+    _logOp: LogOp = AND
+    _expressions: [IDFilterExpression]!
+}
+
+input IDArrayFilterExpression {
+    value: ID
+    values: [ID]
+    _apply: ArrayMode
+    _instances: Int
+    _operator: IDOperator = EQUALS
+}
+
+input IDArrayFilter {
+    _logOp: LogOp = AND
+    _expressions: [IDArrayFilterExpression]!
+}
+
+input StringFilterExpression {
+    value: String
+    _operator: StringOperator = EQUALS
+    _ignoreCase: Boolean
+}
+
+input StringFilter {
+    _logOp: LogOp = AND
+    _expressions: [StringFilterExpression]!
+}
+
+input StringArrayFilterExpression {
+    value: String
+    values: [String]
+    _apply: ArrayMode
+    _instances: Int
+    _operator: StringOperator = EQUALS
+    _ignoreCase: Boolean
+}
+
+input StringArrayFilter {
+    _logOp: LogOp = AND
+    _expressions: [StringArrayFilterExpression]!
+}
+
+input IntFilterExpression {
+    value: Int
+    _operator: IntOperator = EQUAL
+}
+
+input IntFilter {
+    _logOp: LogOp = AND
+    _expressions: [IntFilterExpression]!
+}
+
+input IntArrayFilterExpression {
+    value: Int
+    values: [Int]
+    _apply: ArrayMode
+    _instances: Int
+    _operator: IntOperator = EQUAL
+}
+
+input IntArrayFilter {
+    _logOp: LogOp = AND
+    _expressions: [IntArrayFilterExpression]!
+}
+
+input FloatFilterExpression {
+    value: Float
+    _operator: FloatOperator = EQUAL
+    _sensitiveness: Float
+}
+
+input FloatFilter {
+    _logOp: LogOp = AND
+    _expressions: [FloatFilterExpression]!
+}
+
+input FloatArrayFilterExpression {
+    value: Float
+    values: [Float]
+    _apply: ArrayMode
+    _instances: Int
+    _operator: FloatOperator = EQUAL
+    _sensitiveness: Float
+}
+
+input FloatArrayFilter {
+    _logOp: LogOp = AND
+    _expressions: [FloatArrayFilterExpression]!
+}
+
+input BooleanFilterExpression {
+    value: Boolean
+    _operator: BooleanOperator = EQUALS
+}
+
+input BooleanFilter {
+    _logOp: LogOp = AND
+    _expressions: [BooleanFilterExpression]!
+}
+
+input BooleanArrayFilterExpression {
+    value: Boolean
+    values: [Boolean]
+    _apply: ArrayMode
+    _instances: Int
+    _operator: BooleanOperator = EQUALS
+}
+
+input BooleanArrayFilter {
+    _logOp: LogOp = AND
+    _expressions: [BooleanArrayFilterExpression]!
+}
+
+input CalendarFilterExpression {
+    value: Calendar
+    _operator: CalendarOperator = AT
+}
+
+input CalendarFilter {
+    _logOp: LogOp = AND
+    _expressions: [CalendarFilterExpression]!
+}
+
+input CalendarArrayFilterExpression {
+    value: Calendar
+    values: [Calendar]
+    _apply: ArrayMode
+    _instances: Int
+    _operator: CalendarOperator = AT
+}
+
+input CalendarArrayFilter {
+    _logOp: LogOp = AND
+    _expressions: [CalendarArrayFilterExpression]!
+}
+
+input DateFilterExpression {
+    value: Date
+    _operator: DateOperator = AT
+}
+
+input DateFilter {
+    _logOp: LogOp = AND
+    _expressions: [DateFilterExpression]!
+}
+
+input DateArrayFilterExpression {
+    value: Date
+    values: [Date]
+    _apply: ArrayMode
+    _instances: Int
+    _operator: DateOperator = AT
+}
+
+input DateArrayFilter {
+    _logOp: LogOp = AND
+    _expressions: [DateArrayFilterExpression]!
+}
+
+input TimeFilterExpression {
+    value: Time
+    _operator: TimeOperator = AT
+}
+
+input TimeFilter {
+    _logOp: LogOp = AND
+    _expressions: [TimeFilterExpression]!
+}
+
+input TimeArrayFilterExpression {
+    value: Time
+    values: [Time]
+    _apply: ArrayMode
+    _instances: Int
+    _operator: TimeOperator = AT
+}
+
+input TimeArrayFilter {
+    _logOp: LogOp = AND
+    _expressions: [TimeArrayFilterExpression]!
+}
+
+input MultiFormatStringFilter {
+    _logOp: LogOp = AND
+    html: StringFilter
+    markdown: StringFilter
+    plaintext: StringFilter
+}
+
+input MultiFormatStringArrayFilter {
+    _match: MultiFormatStringFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input ArticleListModelModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    title: StringFilter
+    articleReferences: LinkModelModelArrayFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input ArticleListModelModelArrayFilter {
+    _match: ArticleListModelModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input CompRateModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    rate: StringFilter
+    notemark: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input CompRateModelArrayFilter {
+    _match: CompRateModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input DisclaimerModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    headerText: StringFilter
+    text: MultiFormatStringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input DisclaimerModelArrayFilter {
+    _match: DisclaimerModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input FeatureItemModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    title: StringFilter
+    description: MultiFormatStringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input FeatureItemModelArrayFilter {
+    _match: FeatureItemModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input FooterColumnModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    sectionTitle: StringFilter
+    links: NavLinkModelArrayFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input FooterColumnModelArrayFilter {
+    _match: FooterColumnModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input HeroBannerModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    title: StringFilter
+    subtitle: MultiFormatStringFilter
+    image: StringFilter
+    primaryCtaLabel: StringFilter
+    primaryCtaUrl: StringFilter
+    secondaryCtaLabel: StringFilter
+    secondaryCtaUrl: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input HeroBannerModelArrayFilter {
+    _match: HeroBannerModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input HlcCheckboxModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    fieldTitle: StringFilter
+    fieldDescription: MultiFormatStringFilter
+    wpWarningMsg: MultiFormatStringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input HlcCheckboxModelArrayFilter {
+    _match: HlcCheckboxModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input HlcCompareCardModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    productCategory: StringFilter
+    cardTitle: StringFilter
+    analyticsLabel: StringFilter
+    productDescription: MultiFormatStringFilter
+    columnOneTitle: MultiFormatStringFilter
+    columnOneValueKey: StringFilter
+    columnOneSuffix: StringFilter
+    columnTwoTitle: MultiFormatStringFilter
+    columnTwoValueKey: StringFilter
+    columnTwoSuffix: StringFilter
+    hideRepayment: BooleanFilter
+    sectionTitle: StringFilter
+    additionalText: MultiFormatStringFilter
+    defaultRepaymentType: StringFilter
+    sectionTitleInterest: StringFilter
+    additionalTextInterestOnly: MultiFormatStringFilter
+    hideAccordion: BooleanFilter
+    collapseOnDesktop: BooleanFilter
+    expandOnMobile: BooleanFilter
+    includeDivider: BooleanFilter
+    accordionTitle: StringFilter
+    benefitsContent: MultiFormatStringFilter
+    benefitsContentWithoutWealthPackage: MultiFormatStringFilter
+    tradeoffsContent: MultiFormatStringFilter
+    tradeoffsWithoutPackage: MultiFormatStringFilter
+    feeContent: MultiFormatStringFilter
+    feeContentWithoutPackage: MultiFormatStringFilter
+    tellMeMoreLink: MultiFormatStringFilter
+    minLoanMessage1: MultiFormatStringFilter
+    fallbackDescription1: MultiFormatStringFilter
+    digihomeLvrMessage1: MultiFormatStringFilter
+    loanAmountExceedMessage1: MultiFormatStringFilter
+    lvrEightyInterestOwnerMessage: MultiFormatStringFilter
+    lvrInterestInvestmentMessage: MultiFormatStringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input HlcCompareCardModelArrayFilter {
+    _match: HlcCompareCardModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input HlcToggleOptionModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    productName: StringFilter
+    fieldType: StringFilter
+    fieldTitle: StringFilter
+    fieldDescription: MultiFormatStringFilter
+    option1Id: StringFilter
+    option1Label: StringFilter
+    option2Id: StringFilter
+    option2Label: StringFilter
+    option3Id: StringFilter
+    option3Label: StringFilter
+    defaultOptionId: StringFilter
+    amountFieldTitle: MultiFormatStringFilter
+    amountFieldDefaultValue: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input HlcToggleOptionModelArrayFilter {
+    _match: HlcToggleOptionModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input HomeLoanProductModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    sourceId: StringFilter
+    productSlug: StringFilter
+    name: StringFilter
+    lastUpdate: StringFilter
+    rateEntries: RateEntryModelArrayFilter
+    disclaimers: DisclaimerModelArrayFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input HomeLoanProductModelArrayFilter {
+    _match: HomeLoanProductModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input HomeLoansPageModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    hero: HeroBannerModelFilter
+    whyChooseItems: FeatureItemModelArrayFilter
+    productCards: ProductCardModelArrayFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input HomeLoansPageModelArrayFilter {
+    _match: HomeLoansPageModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input LinkModelModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    pageTitle: StringFilter
+    pageUrl: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input LinkModelModelArrayFilter {
+    _match: LinkModelModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input MdcResultMappingModelModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    primaryDropdown: StringFilter
+    secondaryDropdown: StringFilter
+    resultHeading: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input MdcResultMappingModelModelArrayFilter {
+    _match: MdcResultMappingModelModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input NavLinkModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    label: StringFilter
+    url: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input NavLinkModelArrayFilter {
+    _match: NavLinkModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input PageModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    title: StringFilter
+    path: StringFilter
+    seoTitle: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input PageModelArrayFilter {
+    _match: PageModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input ProductCardModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    title: StringFilter
+    image: StringFilter
+    bullets: StringArrayFilter
+    description: MultiFormatStringFilter
+    href: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input ProductCardModelArrayFilter {
+    _match: ProductCardModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input QuickLinkModelModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    title: StringFilter
+    text: MultiFormatStringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input QuickLinkModelModelArrayFilter {
+    _match: QuickLinkModelModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input RateEntryModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    sourceId: StringFilter
+    busref: StringFilter
+    catref: StringFilter
+    prodref: StringFilter
+    publishstatus: StringFilter
+    name: StringFilter
+    prefix: StringFilter
+    rate: StringFilter
+    suffix: StringFilter
+    futRate: StringFilter
+    monthlyRate: StringFilter
+    quarterlyRate: StringFilter
+    halfYearlyRate: StringFilter
+    annualRate: StringFilter
+    notemark: StringFilter
+    days: StringFilter
+    productWebAddress: StringFilter
+    compRates: CompRateModelArrayFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input RateEntryModelArrayFilter {
+    _match: RateEntryModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input SectionGroupModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    heading: StringFilter
+    layout: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input SectionGroupModelArrayFilter {
+    _match: SectionGroupModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input SectionNavItemModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    label: StringFilter
+    url: StringFilter
+    image: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input SectionNavItemModelArrayFilter {
+    _match: SectionNavItemModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input SiteChromeModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    navLinks: NavLinkModelArrayFilter
+    sectionNavItems: SectionNavItemModelArrayFilter
+    footerColumns: FooterColumnModelArrayFilter
+    footerText: MultiFormatStringFilter
+    acknowledgementLinkText: StringFilter
+    acknowledgementLinkUrl: StringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input SiteChromeModelArrayFilter {
+    _match: SiteChromeModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+input GenericContentFragmentModelFilter {
+    _logOp: LogOp = AND
+    _path: IDFilter
+    _variation: StringFilter
+    cfText: MultiFormatStringFilter
+    _variations: StringArrayFilter
+    _tags: StringArrayFilter
+}
+
+input GenericContentFragmentModelArrayFilter {
+    _match: GenericContentFragmentModelFilter
+    _apply: ArrayMode
+    _instances: Int
+}
+
+directive @resolver(name: String, options: String, source: String) on UNION
+union AllFragmentModels @resolver(name : "sites/default", source : "AllFragmentModels") = ArticleListModelModel | CompRateModel | DisclaimerModel | FeatureItemModel | FooterColumnModel | HeroBannerModel | HlcCheckboxModel | HlcCompareCardModel | HlcToggleOptionModel | HomeLoanProductModel | HomeLoansPageModel | LinkModelModel | MdcResultMappingModelModel | NavLinkModel | PageModel | ProductCardModel | QuickLinkModelModel | RateEntryModel | SectionGroupModel | SectionNavItemModel | SiteChromeModel | GenericContentFragmentModel
+
+union Reference @resolver(name : "sites/default", source : "Reference") = PageRef | ImageRef | MultimediaRef | ArchiveRef | DocumentRef | ArticleListModelModel | CompRateModel | DisclaimerModel | FeatureItemModel | FooterColumnModel | HeroBannerModel | HlcCheckboxModel | HlcCompareCardModel | HlcToggleOptionModel | HomeLoanProductModel | HomeLoansPageModel | LinkModelModel | MdcResultMappingModelModel | NavLinkModel | PageModel | ProductCardModel | QuickLinkModelModel | RateEntryModel | SectionGroupModel | SectionNavItemModel | SiteChromeModel | GenericContentFragmentModel
+
+directive @fetcher(name: String, options: String, source: String) on FIELD_DEFINITION
+type QueryType {
+    """
+    Get a single `articleListModel`, specified by its path and optional variation
+    """
+    articleListModelByPath(_path: String!, variation: String): ArticleListModelModelResult! @fetcher(name : "sites/default", source : "articleListModelByPath")
+    """
+    Get a single `compRate`, specified by its path and optional variation
+    """
+    compRateByPath(_path: String!, variation: String): CompRateModelResult! @fetcher(name : "sites/default", source : "compRateByPath")
+    """
+    Get a single `disclaimer`, specified by its path and optional variation
+    """
+    disclaimerByPath(_path: String!, variation: String): DisclaimerModelResult! @fetcher(name : "sites/default", source : "disclaimerByPath")
+    """
+    Get a single `featureItem`, specified by its path and optional variation
+    """
+    featureItemByPath(_path: String!, variation: String): FeatureItemModelResult! @fetcher(name : "sites/default", source : "featureItemByPath")
+    """
+    Get a single `footerColumn`, specified by its path and optional variation
+    """
+    footerColumnByPath(_path: String!, variation: String): FooterColumnModelResult! @fetcher(name : "sites/default", source : "footerColumnByPath")
+    """
+    Get a single `heroBanner`, specified by its path and optional variation
+    """
+    heroBannerByPath(_path: String!, variation: String): HeroBannerModelResult! @fetcher(name : "sites/default", source : "heroBannerByPath")
+    """
+    Get a single `hlcCheckbox`, specified by its path and optional variation
+    """
+    hlcCheckboxByPath(_path: String!, variation: String): HlcCheckboxModelResult! @fetcher(name : "sites/default", source : "hlcCheckboxByPath")
+    """
+    Get a single `hlcCompareCard`, specified by its path and optional variation
+    """
+    hlcCompareCardByPath(_path: String!, variation: String): HlcCompareCardModelResult! @fetcher(name : "sites/default", source : "hlcCompareCardByPath")
+    """
+    Get a single `hlcToggleOption`, specified by its path and optional variation
+    """
+    hlcToggleOptionByPath(_path: String!, variation: String): HlcToggleOptionModelResult! @fetcher(name : "sites/default", source : "hlcToggleOptionByPath")
+    """
+    Get a single `homeLoanProduct`, specified by its path and optional variation
+    """
+    homeLoanProductByPath(_path: String!, variation: String): HomeLoanProductModelResult! @fetcher(name : "sites/default", source : "homeLoanProductByPath")
+    """
+    Get a single `homeLoansPage`, specified by its path and optional variation
+    """
+    homeLoansPageByPath(_path: String!, variation: String): HomeLoansPageModelResult! @fetcher(name : "sites/default", source : "homeLoansPageByPath")
+    """
+    Get a single `linkModel`, specified by its path and optional variation
+    """
+    linkModelByPath(_path: String!, variation: String): LinkModelModelResult! @fetcher(name : "sites/default", source : "linkModelByPath")
+    """
+    Get a single `mdcResultMappingModel`, specified by its path and optional variation
+    """
+    mdcResultMappingModelByPath(_path: String!, variation: String): MdcResultMappingModelModelResult! @fetcher(name : "sites/default", source : "mdcResultMappingModelByPath")
+    """
+    Get a single `navLink`, specified by its path and optional variation
+    """
+    navLinkByPath(_path: String!, variation: String): NavLinkModelResult! @fetcher(name : "sites/default", source : "navLinkByPath")
+    """
+    Get a single `page`, specified by its path and optional variation
+    """
+    pageByPath(_path: String!, variation: String): PageModelResult! @fetcher(name : "sites/default", source : "pageByPath")
+    """
+    Get a single `productCard`, specified by its path and optional variation
+    """
+    productCardByPath(_path: String!, variation: String): ProductCardModelResult! @fetcher(name : "sites/default", source : "productCardByPath")
+    """
+    Get a single `quickLinkModel`, specified by its path and optional variation
+    """
+    quickLinkModelByPath(_path: String!, variation: String): QuickLinkModelModelResult! @fetcher(name : "sites/default", source : "quickLinkModelByPath")
+    """
+    Get a single `rateEntry`, specified by its path and optional variation
+    """
+    rateEntryByPath(_path: String!, variation: String): RateEntryModelResult! @fetcher(name : "sites/default", source : "rateEntryByPath")
+    """
+    Get a single `sectionGroup`, specified by its path and optional variation
+    """
+    sectionGroupByPath(_path: String!, variation: String): SectionGroupModelResult! @fetcher(name : "sites/default", source : "sectionGroupByPath")
+    """
+    Get a single `sectionNavItem`, specified by its path and optional variation
+    """
+    sectionNavItemByPath(_path: String!, variation: String): SectionNavItemModelResult! @fetcher(name : "sites/default", source : "sectionNavItemByPath")
+    """
+    Get a single `siteChrome`, specified by its path and optional variation
+    """
+    siteChromeByPath(_path: String!, variation: String): SiteChromeModelResult! @fetcher(name : "sites/default", source : "siteChromeByPath")
+    """
+    Get a single `genericContentFragment`, specified by its path and optional variation
+    """
+    genericContentFragmentByPath(_path: String!, variation: String): GenericContentFragmentModelResult! @fetcher(name : "sites/default", source : "genericContentFragmentByPath")
+    """
+    Get multiple `articleListModel` objects
+    """
+    articleListModelList(filter: ArticleListModelModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): ArticleListModelModelResults! @fetcher(name : "sites/default", source : "articleListModelList")
+    """
+    Get multiple `articleListModel` objects with cursor-based pagination
+    """
+    articleListModelPaginated(filter: ArticleListModelModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): ArticleListModelModelConnection! @fetcher(name : "sites/default", source : "articleListModelPaginated")
+    """
+    Get multiple `compRate` objects
+    """
+    compRateList(filter: CompRateModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): CompRateModelResults! @fetcher(name : "sites/default", source : "compRateList")
+    """
+    Get multiple `compRate` objects with cursor-based pagination
+    """
+    compRatePaginated(filter: CompRateModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): CompRateModelConnection! @fetcher(name : "sites/default", source : "compRatePaginated")
+    """
+    Get multiple `disclaimer` objects
+    """
+    disclaimerList(filter: DisclaimerModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): DisclaimerModelResults! @fetcher(name : "sites/default", source : "disclaimerList")
+    """
+    Get multiple `disclaimer` objects with cursor-based pagination
+    """
+    disclaimerPaginated(filter: DisclaimerModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): DisclaimerModelConnection! @fetcher(name : "sites/default", source : "disclaimerPaginated")
+    """
+    Get multiple `featureItem` objects
+    """
+    featureItemList(filter: FeatureItemModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): FeatureItemModelResults! @fetcher(name : "sites/default", source : "featureItemList")
+    """
+    Get multiple `featureItem` objects with cursor-based pagination
+    """
+    featureItemPaginated(filter: FeatureItemModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): FeatureItemModelConnection! @fetcher(name : "sites/default", source : "featureItemPaginated")
+    """
+    Get multiple `footerColumn` objects
+    """
+    footerColumnList(filter: FooterColumnModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): FooterColumnModelResults! @fetcher(name : "sites/default", source : "footerColumnList")
+    """
+    Get multiple `footerColumn` objects with cursor-based pagination
+    """
+    footerColumnPaginated(filter: FooterColumnModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): FooterColumnModelConnection! @fetcher(name : "sites/default", source : "footerColumnPaginated")
+    """
+    Get multiple `heroBanner` objects
+    """
+    heroBannerList(filter: HeroBannerModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): HeroBannerModelResults! @fetcher(name : "sites/default", source : "heroBannerList")
+    """
+    Get multiple `heroBanner` objects with cursor-based pagination
+    """
+    heroBannerPaginated(filter: HeroBannerModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): HeroBannerModelConnection! @fetcher(name : "sites/default", source : "heroBannerPaginated")
+    """
+    Get multiple `hlcCheckbox` objects
+    """
+    hlcCheckboxList(filter: HlcCheckboxModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): HlcCheckboxModelResults! @fetcher(name : "sites/default", source : "hlcCheckboxList")
+    """
+    Get multiple `hlcCheckbox` objects with cursor-based pagination
+    """
+    hlcCheckboxPaginated(filter: HlcCheckboxModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): HlcCheckboxModelConnection! @fetcher(name : "sites/default", source : "hlcCheckboxPaginated")
+    """
+    Get multiple `hlcCompareCard` objects
+    """
+    hlcCompareCardList(filter: HlcCompareCardModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): HlcCompareCardModelResults! @fetcher(name : "sites/default", source : "hlcCompareCardList")
+    """
+    Get multiple `hlcCompareCard` objects with cursor-based pagination
+    """
+    hlcCompareCardPaginated(filter: HlcCompareCardModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): HlcCompareCardModelConnection! @fetcher(name : "sites/default", source : "hlcCompareCardPaginated")
+    """
+    Get multiple `hlcToggleOption` objects
+    """
+    hlcToggleOptionList(filter: HlcToggleOptionModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): HlcToggleOptionModelResults! @fetcher(name : "sites/default", source : "hlcToggleOptionList")
+    """
+    Get multiple `hlcToggleOption` objects with cursor-based pagination
+    """
+    hlcToggleOptionPaginated(filter: HlcToggleOptionModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): HlcToggleOptionModelConnection! @fetcher(name : "sites/default", source : "hlcToggleOptionPaginated")
+    """
+    Get multiple `homeLoanProduct` objects
+    """
+    homeLoanProductList(filter: HomeLoanProductModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): HomeLoanProductModelResults! @fetcher(name : "sites/default", source : "homeLoanProductList")
+    """
+    Get multiple `homeLoanProduct` objects with cursor-based pagination
+    """
+    homeLoanProductPaginated(filter: HomeLoanProductModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): HomeLoanProductModelConnection! @fetcher(name : "sites/default", source : "homeLoanProductPaginated")
+    """
+    Get multiple `homeLoansPage` objects
+    """
+    homeLoansPageList(filter: HomeLoansPageModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): HomeLoansPageModelResults! @fetcher(name : "sites/default", source : "homeLoansPageList")
+    """
+    Get multiple `homeLoansPage` objects with cursor-based pagination
+    """
+    homeLoansPagePaginated(filter: HomeLoansPageModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): HomeLoansPageModelConnection! @fetcher(name : "sites/default", source : "homeLoansPagePaginated")
+    """
+    Get multiple `linkModel` objects
+    """
+    linkModelList(filter: LinkModelModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): LinkModelModelResults! @fetcher(name : "sites/default", source : "linkModelList")
+    """
+    Get multiple `linkModel` objects with cursor-based pagination
+    """
+    linkModelPaginated(filter: LinkModelModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): LinkModelModelConnection! @fetcher(name : "sites/default", source : "linkModelPaginated")
+    """
+    Get multiple `mdcResultMappingModel` objects
+    """
+    mdcResultMappingModelList(filter: MdcResultMappingModelModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): MdcResultMappingModelModelResults! @fetcher(name : "sites/default", source : "mdcResultMappingModelList")
+    """
+    Get multiple `mdcResultMappingModel` objects with cursor-based pagination
+    """
+    mdcResultMappingModelPaginated(filter: MdcResultMappingModelModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): MdcResultMappingModelModelConnection! @fetcher(name : "sites/default", source : "mdcResultMappingModelPaginated")
+    """
+    Get multiple `navLink` objects
+    """
+    navLinkList(filter: NavLinkModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): NavLinkModelResults! @fetcher(name : "sites/default", source : "navLinkList")
+    """
+    Get multiple `navLink` objects with cursor-based pagination
+    """
+    navLinkPaginated(filter: NavLinkModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): NavLinkModelConnection! @fetcher(name : "sites/default", source : "navLinkPaginated")
+    """
+    Get multiple `page` objects
+    """
+    pageList(filter: PageModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): PageModelResults! @fetcher(name : "sites/default", source : "pageList")
+    """
+    Get multiple `page` objects with cursor-based pagination
+    """
+    pagePaginated(filter: PageModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): PageModelConnection! @fetcher(name : "sites/default", source : "pagePaginated")
+    """
+    Get multiple `productCard` objects
+    """
+    productCardList(filter: ProductCardModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): ProductCardModelResults! @fetcher(name : "sites/default", source : "productCardList")
+    """
+    Get multiple `productCard` objects with cursor-based pagination
+    """
+    productCardPaginated(filter: ProductCardModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): ProductCardModelConnection! @fetcher(name : "sites/default", source : "productCardPaginated")
+    """
+    Get multiple `quickLinkModel` objects
+    """
+    quickLinkModelList(filter: QuickLinkModelModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): QuickLinkModelModelResults! @fetcher(name : "sites/default", source : "quickLinkModelList")
+    """
+    Get multiple `quickLinkModel` objects with cursor-based pagination
+    """
+    quickLinkModelPaginated(filter: QuickLinkModelModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): QuickLinkModelModelConnection! @fetcher(name : "sites/default", source : "quickLinkModelPaginated")
+    """
+    Get multiple `rateEntry` objects
+    """
+    rateEntryList(filter: RateEntryModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): RateEntryModelResults! @fetcher(name : "sites/default", source : "rateEntryList")
+    """
+    Get multiple `rateEntry` objects with cursor-based pagination
+    """
+    rateEntryPaginated(filter: RateEntryModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): RateEntryModelConnection! @fetcher(name : "sites/default", source : "rateEntryPaginated")
+    """
+    Get multiple `sectionGroup` objects
+    """
+    sectionGroupList(filter: SectionGroupModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): SectionGroupModelResults! @fetcher(name : "sites/default", source : "sectionGroupList")
+    """
+    Get multiple `sectionGroup` objects with cursor-based pagination
+    """
+    sectionGroupPaginated(filter: SectionGroupModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): SectionGroupModelConnection! @fetcher(name : "sites/default", source : "sectionGroupPaginated")
+    """
+    Get multiple `sectionNavItem` objects
+    """
+    sectionNavItemList(filter: SectionNavItemModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): SectionNavItemModelResults! @fetcher(name : "sites/default", source : "sectionNavItemList")
+    """
+    Get multiple `sectionNavItem` objects with cursor-based pagination
+    """
+    sectionNavItemPaginated(filter: SectionNavItemModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): SectionNavItemModelConnection! @fetcher(name : "sites/default", source : "sectionNavItemPaginated")
+    """
+    Get multiple `siteChrome` objects
+    """
+    siteChromeList(filter: SiteChromeModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): SiteChromeModelResults! @fetcher(name : "sites/default", source : "siteChromeList")
+    """
+    Get multiple `siteChrome` objects with cursor-based pagination
+    """
+    siteChromePaginated(filter: SiteChromeModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): SiteChromeModelConnection! @fetcher(name : "sites/default", source : "siteChromePaginated")
+    """
+    Get multiple `genericContentFragment` objects
+    """
+    genericContentFragmentList(filter: GenericContentFragmentModelFilter, variation: String, _locale: String, includeVariations: Boolean, limit: Int, offset: Int, sort: String): GenericContentFragmentModelResults! @fetcher(name : "sites/default", source : "genericContentFragmentList")
+    """
+    Get multiple `genericContentFragment` objects with cursor-based pagination
+    """
+    genericContentFragmentPaginated(filter: GenericContentFragmentModelFilter, variation: String, _locale: String, after: String, first: Int, sort: String, includeVariations: Boolean): GenericContentFragmentModelConnection! @fetcher(name : "sites/default", source : "genericContentFragmentPaginated")
+}

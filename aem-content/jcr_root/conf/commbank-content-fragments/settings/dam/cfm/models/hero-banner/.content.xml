@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Template"
+    allowedPaths="[/content/dam/commbank(/.*)?]"
+    ranking="{Long}100">
+    <jcr:content
+        cq:scaffolding="/conf/commbank-content-fragments/settings/dam/cfm/models/hero-banner/jcr:content/model"
+        cq:templateType="/libs/settings/dam/cfm/model-types/fragment"
+        jcr:description="The Home Loans landing page hero banner (title, subtitle, image, up to 2 CTAs)."
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Hero Banner"
+        sling:resourceSuperType="dam/cfm/models/console/components/data/entity"
+        sling:resourceType="dam/cfm/models/console/components/data/entity/default"
+        status="enabled">
+        <metadata jcr:primaryType="nt:unstructured">
+            <graphQL
+                jcr:primaryType="nt:unstructured"
+                apiName="HeroBanner"
+                queryFieldMultiple="heroBannerList"
+                queryFieldSingle="heroBannerByPath"/>
+        </metadata>
+        <model
+            cq:targetPath="/content/dam/commbank/home-loans"
+            jcr:primaryType="cq:PageContent"
+            sling:resourceType="wcm/scaffolding/components/scaffolding"
+            dataTypesConfig="/mnt/overlay/settings/dam/cfm/models/formbuilderconfig/datatypes"
+            maxGeneratedOrder="10">
+            <cq:dialog
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/authoring/dialog">
+                <content
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                    <items jcr:primaryType="nt:unstructured">
+                        <title
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="Title"
+                            listOrder="1"
+                            metaType="text-single"
+                            name="title"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </title>
+                        <subtitle
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="dam/cfm/admin/components/authoring/contenteditor/multieditor"
+                            cfm-element="Text"
+                            default-mime-type="text/html"
+                            fieldLabel="Subtitle"
+                            listOrder="2"
+                            metaType="text-multi"
+                            name="subtitle"
+                            valueType="string"/>
+                        <image
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldDescription="Hero image URL."
+                            fieldLabel="Image URL"
+                            listOrder="3"
+                            metaType="text-single"
+                            name="image"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </image>
+                        <primaryCtaLabel
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="Primary CTA Label"
+                            listOrder="4"
+                            metaType="text-single"
+                            name="primaryCtaLabel"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </primaryCtaLabel>
+                        <primaryCtaUrl
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="Primary CTA URL"
+                            listOrder="5"
+                            metaType="text-single"
+                            name="primaryCtaUrl"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </primaryCtaUrl>
+                        <secondaryCtaLabel
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="Secondary CTA Label"
+                            listOrder="6"
+                            metaType="text-single"
+                            name="secondaryCtaLabel"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </secondaryCtaLabel>
+                        <secondaryCtaUrl
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                            fieldLabel="Secondary CTA URL"
+                            listOrder="7"
+                            metaType="text-single"
+                            name="secondaryCtaUrl"
+                            valueType="string">
+                            <granite:data jcr:primaryType="nt:unstructured"/>
+                        </secondaryCtaUrl>
+                    </items>
+                </content>
+            </cq:dialog>
+        </model>
+    </jcr:content>
+</jcr:root>
