@@ -1,3 +1,5 @@
+import crypto from "node:crypto";
+
 /**
  * Server-only fetch wrapper for AEM GraphQL persisted queries.
  * Never import this from a Client Component — it carries the AEM service token.
@@ -19,16 +21,112 @@ const AEM_BASE_URL = process.env.AEM_BASE_URL;
 const AEM_SERVICE_TOKEN = process.env.AEM_SERVICE_TOKEN;
 const AEM_USER = process.env.AEM_USER;
 const AEM_PASSWORD = process.env.AEM_PASSWORD;
+const AEM_IMS_HOST = process.env.AEM_IMS_HOST ?? "https://ims-na1.adobelogin.com";
+const AEM_IMS_CLIENT_ID = process.env.AEM_IMS_CLIENT_ID;
+const AEM_IMS_CLIENT_SECRET = process.env.AEM_IMS_CLIENT_SECRET;
+const AEM_IMS_ORG_ID = process.env.AEM_IMS_ORG_ID;
+const AEM_IMS_TECHNICAL_ACCOUNT_ID = process.env.AEM_IMS_TECHNICAL_ACCOUNT_ID;
+const AEM_IMS_PRIVATE_KEY = process.env.AEM_IMS_PRIVATE_KEY;
+const AEM_IMS_PRIVATE_KEY_PASSPHRASE = process.env.AEM_IMS_PRIVATE_KEY_PASSPHRASE;
+const AEM_IMS_SCOPE =
+  process.env.AEM_IMS_SCOPE ?? "https://ims-na1.adobelogin.com/s/ent_adobeio_sdk";
+
+let cachedAemServiceToken: { value: string; expiresAt: number } | undefined;
+
+function base64UrlEncode(value: string): string {
+  return Buffer.from(value)
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
+}
+
+function buildAdobeImsJwt(): string {
+  if (!AEM_IMS_CLIENT_ID || !AEM_IMS_ORG_ID || !AEM_IMS_TECHNICAL_ACCOUNT_ID || !AEM_IMS_PRIVATE_KEY) {
+    throw new Error(
+      "AEM IMS JWT env vars are incomplete. Set AEM_IMS_CLIENT_ID, AEM_IMS_ORG_ID, AEM_IMS_TECHNICAL_ACCOUNT_ID, and AEM_IMS_PRIVATE_KEY.",
+    );
+  }
+
+  const now = Math.floor(Date.now() / 1000);
+  const header = { alg: "RS256", typ: "JWT" };
+  const payload = {
+    exp: now + 86400,
+    iss: AEM_IMS_ORG_ID,
+    sub: AEM_IMS_TECHNICAL_ACCOUNT_ID,
+    aud: `${AEM_IMS_HOST}/c/${AEM_IMS_CLIENT_ID}`,
+    [AEM_IMS_SCOPE]: true,
+  };
+
+  const encodedHeader = base64UrlEncode(JSON.stringify(header));
+  const encodedPayload = base64UrlEncode(JSON.stringify(payload));
+  const signingKey = crypto.createPrivateKey({
+    key: AEM_IMS_PRIVATE_KEY,
+    passphrase: AEM_IMS_PRIVATE_KEY_PASSPHRASE || undefined,
+  });
+  const signer = crypto.createSign("RSA-SHA256");
+  signer.update(`${encodedHeader}.${encodedPayload}`);
+  const signature = signer.sign(signingKey, "base64url");
+
+  return `${encodedHeader}.${encodedPayload}.${signature}`;
+}
+
+async function fetchAemServiceToken(): Promise<string | undefined> {
+  if (AEM_SERVICE_TOKEN) {
+    return AEM_SERVICE_TOKEN;
+  }
+
+  if (!AEM_IMS_CLIENT_ID || !AEM_IMS_CLIENT_SECRET || !AEM_IMS_ORG_ID || !AEM_IMS_TECHNICAL_ACCOUNT_ID || !AEM_IMS_PRIVATE_KEY) {
+    return undefined;
+  }
+
+  const now = Date.now();
+  if (cachedAemServiceToken && cachedAemServiceToken.expiresAt > now) {
+    return cachedAemServiceToken.value;
+  }
+
+  const jwtToken = buildAdobeImsJwt();
+  const response = await fetch(`${AEM_IMS_HOST}/ims/exchange/jwt`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      client_id: AEM_IMS_CLIENT_ID,
+      client_secret: AEM_IMS_CLIENT_SECRET,
+      jwt_token: jwtToken,
+    }).toString(),
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`Failed to exchange Adobe IMS JWT for an AEM access token (${response.status}): ${body}`);
+  }
+
+  const json = (await response.json()) as { access_token?: string; expires_in?: number };
+  if (!json.access_token) {
+    throw new Error("Adobe IMS JWT exchange returned no access_token");
+  }
+
+  cachedAemServiceToken = {
+    value: json.access_token,
+    expiresAt: now + (json.expires_in ? json.expires_in * 1000 - 60000 : 23 * 60 * 60 * 1000),
+  };
+
+  return cachedAemServiceToken.value;
+}
 
 /**
  * Bearer token (AEM_SERVICE_TOKEN) is for real deployments; Basic Auth
  * (AEM_USER/AEM_PASSWORD) is for local dev against a local AEM instance's
- * default admin/admin credentials — verified against a real local AEM 6.5.25
- * instance, which returns 401 on the GraphQL execute endpoint without auth.
+ * default admin/admin credentials. If neither is configured, this app will
+ * attempt to mint a short-lived Adobe IMS JWT-issued token from the AEM IMS
+ * env vars when they are present.
  */
-function aemAuthHeaders(): Record<string, string> | undefined {
-  if (AEM_SERVICE_TOKEN) {
-    return { Authorization: `Bearer ${AEM_SERVICE_TOKEN}` };
+async function aemAuthHeaders(): Promise<Record<string, string> | undefined> {
+  const serviceToken = await fetchAemServiceToken();
+  if (serviceToken) {
+    return { Authorization: `Bearer ${serviceToken}` };
   }
   if (AEM_USER && AEM_PASSWORD) {
     const encoded = Buffer.from(`${AEM_USER}:${AEM_PASSWORD}`).toString("base64");
@@ -72,7 +170,7 @@ export async function fetchPersistedQuery<T>(
 
   const res = await fetch(url, {
     cache: "no-store",
-    headers: aemAuthHeaders(),
+    headers: await aemAuthHeaders(),
   });
 
   if (!res.ok) {
@@ -134,7 +232,7 @@ export async function fetchDamJson<T>(damPath: string): Promise<T> {
   }
   const res = await fetch(`${AEM_BASE_URL}${damPath}`, {
     cache: "no-store",
-    headers: aemAuthHeaders(),
+    headers: await aemAuthHeaders(),
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch DAM asset ${damPath} (${res.status})`);
